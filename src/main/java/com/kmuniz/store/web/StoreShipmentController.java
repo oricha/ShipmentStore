@@ -25,34 +25,30 @@ public class StoreShipmentController {
         this.shipmentRepository = shipmentRepository;
     }
     @GetMapping("/shipment/{date}")
-    Collection<Shipment> shipments(@PathVariable Date date) {
+    ResponseEntity<?> shipments(@PathVariable Date date) {
         Collection<Shipment> shipment =   Collections.emptyList();
-        if (date != null) {
-            shipment = shipmentRepository.findAllByPlannedDeliveryDate(date);
+        try{
+            if (date != null) {
+                shipment = shipmentRepository.findAllByPlannedDeliveryDate(date);
+            }
+        } catch (Exception e) {
+            log.error("Error: {}", e.getMessage());
+            return ResponseEntity.internalServerError().build();
         }
-        return shipment;
+        return ResponseEntity.ok().body(shipment);
     }
 
     @GetMapping("/shipment")
-    /**
-     *  Filter shipments by date range, verify initialDate and endDate is different from null and paginate the response
-     */
-    Collection<Shipment> shipments(@RequestParam(required = false) Date iniDate,
+    ResponseEntity<?> shipments(@RequestParam(required = false) Date iniDate,
                                    @RequestParam(required = false) Date endDate,
                                    @RequestParam(required = false) Integer page,
                                    @RequestParam(required = false) Integer size) {
 
         if (iniDate != null && endDate != null) {
             var shipment = shipmentRepository.findAllByPlannedDeliveryDateIsBetween(iniDate, endDate);
-            return shipment;
+            return ResponseEntity.ok().body(shipment);
         } else {
-            if (page != null && size != null) {
-                var shipment = shipmentRepository.findAll();
-                return shipment;
-            } else {
-                var shipment = shipmentRepository.findAll();
-                return shipment;
-            }
+           return  ResponseEntity.badRequest().build();
         }
     }
 

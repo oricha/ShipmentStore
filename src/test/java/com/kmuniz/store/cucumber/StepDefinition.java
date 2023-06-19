@@ -2,6 +2,7 @@ package com.kmuniz.store.cucumber;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
@@ -37,7 +38,7 @@ public class StepDefinition {
     private static final String APPLICATION_JSON = "application/json";
 
     private final InputStream jsonInputStream = this.getClass().getClassLoader().getResourceAsStream("cucumber.json");
-    private final String jsonString = new Scanner(jsonInputStream, "UTF-8").useDelimiter("\\Z").next();
+    private final String jsonString = new Scanner(jsonInputStream, StandardCharsets.UTF_8).useDelimiter("\\Z").next();
 
     private final WireMockServer wireMockServer = new WireMockServer(options().dynamicPort());
     private final CloseableHttpClient httpClient = HttpClients.createDefault();
@@ -45,7 +46,7 @@ public class StepDefinition {
 
 
 
-    @When("^users call the API shipment with a Date path parameter {^\\d{4}-\\d{2}-\\d{2}$}$")
+    @When("^users call the API shipment with a Date path parameter {^\\d{4}-\\d{2}-\\d{2}$}")
     public void usersCallAPIWithADate(String dateParam) throws IOException {
         wireMockServer.start();
 
@@ -99,7 +100,7 @@ public class StepDefinition {
 
     private String convertResponseToString(HttpResponse response) throws IOException {
         InputStream responseStream = response.getEntity().getContent();
-        Scanner scanner = new Scanner(responseStream, "UTF-8");
+        Scanner scanner = new Scanner(responseStream, StandardCharsets.UTF_8);
         String responseString = scanner.useDelimiter("\\Z").next();
         scanner.close();
         return responseString;
