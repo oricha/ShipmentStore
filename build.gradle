@@ -1,0 +1,66 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.1.0'
+	id 'io.spring.dependency-management' version '1.1.0'
+	id "se.thinkcode.cucumber-runner" version "0.0.8"
+}
+
+group = 'com.kmuniz.store'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '17'
+}
+
+repositories {
+	mavenCentral()
+}
+
+configurations {
+	cucumberRuntime {
+		extendsFrom testImplementation
+	}
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.amqp:spring-amqp:3.0.4'
+	implementation 'javax.xml.bind:jaxb-api:2.3.1'
+	implementation 'org.springframework.amqp:spring-rabbit:3.0.4'
+	implementation 'org.springframework.amqp:spring-rabbit-junit:3.0.4'
+
+	runtimeOnly 'com.h2database:h2'
+	compileOnly 'org.projectlombok:lombok:1.18.28'
+	annotationProcessor 'org.projectlombok:lombok:1.18.28'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.amqp:spring-rabbit-test:3.0.4'
+	testImplementation 'com.github.tomakehurst:wiremock:2.27.2'
+	testImplementation 'org.mockito:mockito-junit-jupiter:3.12.4'
+	testImplementation 'io.rest-assured:rest-assured:4.4.0'
+
+	implementation 'io.cucumber:cucumber-java:7.12.1'
+	implementation 'io.cucumber:cucumber-junit:7.12.1'
+	testImplementation 'org.junit.vintage:junit-vintage-engine:5.7.2'
+
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+//
+//tasks.register('cucumber') {
+//	dependsOn assemble, testClasses
+//	doLast {
+//		javaexec {
+//			main = "io.cucumber.core.cli.Main"
+//			classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+//			args = [
+//					'--plugin', 'pretty',
+//					'--plugin', 'html:target/cucumber-report.html',
+//					'--glue', 'com.kmuniz.store.cucumber',
+//					'src/test/resources']
+//		}
+//	}
+//}

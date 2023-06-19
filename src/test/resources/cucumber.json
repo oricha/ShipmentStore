@@ -1,0 +1,16 @@
+{
+  "id": "12370",
+  "status": "planned",
+  "plannedDeliveryDate": "2022-11-01T10:47:30.641Z",
+  "category": "truck",
+  "products": [
+    {
+      "name": "chair",
+      "quantity": 3
+    },
+    {
+      "name": "leg",
+      "quantity": 12
+    }
+  ]
+}

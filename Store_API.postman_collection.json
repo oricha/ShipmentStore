@@ -1,0 +1,139 @@
+{
+	"info": {
+		"_postman_id": "784502a2-1a87-4c4e-93e8-81152cb6a0b5",
+		"name": "Store API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "253657"
+	},
+	"item": [
+		{
+			"name": "Health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/health",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Shipments",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/shipment/2022-11-01",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"shipment",
+						"2022-11-01"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Shipments byDate",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/shipment?iniDate=2022-11-01&endDate=2022-11-01&page=1&size=10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"shipment"
+					],
+					"query": [
+						{
+							"key": "iniDate",
+							"value": "2022-11-01"
+						},
+						{
+							"key": "endDate",
+							"value": "2022-11-01"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "size",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Shipment",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": \"456454\",\n  \"status\": \"planned\",\n  \"plannedDeliveryDate\": \"2022-11-01T10:47:30.641Z\",\n  \"category\": \"truck\",\n  \"items\": [\n    {\n      \"name\": \"chair\",\n      \"quantity\": 3\n    },\n    {\n      \"name\": \"leg\",\n      \"quantity\": 12\n    }\n  ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/shipment/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"shipment",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Shipments Copy",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/shipment",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"shipment"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
